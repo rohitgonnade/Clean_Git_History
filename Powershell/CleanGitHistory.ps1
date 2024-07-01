@@ -75,6 +75,10 @@ git gc --prune=now
 Write-Host "Verifying object counts..."
 git count-objects -v
 
+
 Write-Host "Git history has been successfully cleaned and repacked."
+
+Write-Host "Now repacking with max-size = 1Gb"
+git repack -a -d --depth=250 --window=250 --max-pack-size=1g
 
 Set-Location $scriptDir
