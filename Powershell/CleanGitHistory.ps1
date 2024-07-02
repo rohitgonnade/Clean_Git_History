@@ -9,11 +9,11 @@ param (
 
 # Function to display help message
 function Show-Help {
-    Write-Host "Usage: .\CleanGitHistory.ps1 -RepoPath <path> -PathsToRemove <paths> [-Aggressive <yes|no>] [-Help]"
+    Write-Host "Usage: # .\CleanGitHistory.ps1 -RepoPath "C:\Path\To\Your\Repo" -PathsToRemove "Resources/3D Models", "Another/Path", "Yet/Another/Path" [-Aggressive <yes|no>] [-Help]"
     Write-Host ""
     Write-Host "Parameters:"
     Write-Host "  -RepoPath        The path to the Git repository."
-    Write-Host "  -PathsToRemove   An array of paths to be removed from the Git history."
+    Write-Host "  -PathsToRemove   An array of relative paths to be removed from the Git history."
     Write-Host "  -Aggressive      (Optional) Set to 'yes' to perform aggressive garbage collection. Default is 'no'. Aggressive can be very time consuming depending upon the sie of Git repo."
     Write-Host "  -Help            Display this help message."
     Write-Host ""

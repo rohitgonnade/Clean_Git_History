@@ -9,8 +9,10 @@ It uses tool [git_filter_repo](https://github.com/newren/git-filter-repo/tree/ma
 - AWS CodeCommit has 2 GB size limit for single file. Occasionly Git creates single .pack file which can go beyond the size limit. 
 
 ## Usage
-.\CleanGitHistory.ps1 -RepoPath "C:\Path\To\Your\Repo" -PathsToRemove "Resources/3D Models", "Another/Path", "Yet/Another/Path"
+.\Powershell\CleanGitHistory.ps1 -RepoPath <path> -PathsToRemove <paths> [-Aggressive <yes|no>] [-Help]
 
+ This script assumes user knows path of the blob which were removed from Git. 
+ -PathsToRemove : relative paths to the RepoPath
 
 ## Working
 - The script accepts the path to the Git repository and an array of paths to remove as parameters.
