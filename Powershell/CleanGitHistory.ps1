@@ -1,8 +1,9 @@
-# .\CleanGitHistory.ps1 -RepoPath "C:\Path\To\Your\Repo" -PathsToRemove "Resources/3D Models", "Another/Path", "Yet/Another/Path"
+# .\CleanGitHistory.ps1 -RepoPath "C:\Path\To\Your\Repo" -PathsToRemove "Resources/3D Models", "Another/Path", "Yet/Another/Path" -Aggressive yes
 
 param (
     [string]$RepoPath,
-    [string[]]$PathsToRemove
+    [string[]]$PathsToRemove,
+    [string]$Aggressive = "no"
 )
 
 # Function to display a message and exit the script
@@ -69,7 +70,11 @@ Remove-Item -Recurse -Force .git/logs/
 
 # Perform garbage collection
 Write-Host "Performing garbage collection..."
-git gc --prune=now
+if ($Aggressive -eq "yes") {
+    git gc --prune=now --aggressive
+} else {
+    git gc --prune=now
+}
 
 # Verify object counts
 Write-Host "Verifying object counts..."
