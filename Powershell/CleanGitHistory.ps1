@@ -3,8 +3,30 @@
 param (
     [string]$RepoPath,
     [string[]]$PathsToRemove,
-    [string]$Aggressive = "no"
+    [string]$Aggressive = "no",
+    [switch]$Help
 )
+
+# Function to display help message
+function Show-Help {
+    Write-Host "Usage: .\CleanGitHistory.ps1 -RepoPath <path> -PathsToRemove <paths> [-Aggressive <yes|no>] [-Help]"
+    Write-Host ""
+    Write-Host "Parameters:"
+    Write-Host "  -RepoPath        The path to the Git repository."
+    Write-Host "  -PathsToRemove   An array of paths to be removed from the Git history."
+    Write-Host "  -Aggressive      (Optional) Set to 'yes' to perform aggressive garbage collection. Default is 'no'. Aggressive can be very time consuming depending upon the sie of Git repo."
+    Write-Host "  -Help            Display this help message."
+    Write-Host ""
+    Write-Host "Description:"
+    Write-Host "  This automated script aims to minimize Git history by removing references to untracked dangling files."
+    Write-Host "  Additionally, it addresses AWS CodeCommit issues by repacking Git history into smaller chunks with a maximum size of 1GB."
+}
+
+# Display help message if -Hselp is specified
+if ($Help) {
+    Show-Help
+    exit
+}
 
 # Function to display a message and exit the script
 function ExitWithMessage($message) {
