@@ -40,9 +40,20 @@ $venvPath = Join-Path $scriptDir "venv"
 $activateScript = Join-Path $venvPath "Scripts/Activate.ps1"
 
 # Check if Python is installed
-if (-not (Get-Command python -ErrorAction SilentlyContinue)) {
+# redirect stderr into stdout
+$p = &{python -V} 2>&1
+# check if an ErrorRecord was returned
+$version = if($p -is [System.Management.Automation.ErrorRecord])
+{
     ExitWithMessage "Python is not installed. Please install Python and try again."
 }
+else 
+{
+    # otherwise return as is
+    $p
+}
+
+ Write-Host "Using installed  $version"
 
 # Check if virtual environment exists
 if (-not (Test-Path $activateScript)) {
